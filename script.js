@@ -98,6 +98,7 @@ function endGame() {
     startScreen.classList.remove('hide');
     startScreen.innerHTML="<b>Game Over</b> <br> Your Final Score is "+player.score+"<br>Press here to start here"
     player.speed=5;
+    lap=1;
     if (player.score>player.bestScore) {
         player.bestScore=player.score;
     }
@@ -126,6 +127,7 @@ function moveEnemy(car){
 function gamePlay() {
     let car=document.querySelector('.car');
     let road=gameArea.getBoundingClientRect();
+    let lap=1;
 
     if(player.start){
 
@@ -156,7 +158,11 @@ function gamePlay() {
         let ps = player.score - 1;
         score.innerHTML="Score: " + ps;
 
-
+        if(player.score>(lap*500)){
+            player.speed+=0.01;
+            lap++;
+        }
+        
         bestScore.innerHTML="Best Score: " + player.bestScore;
     }
 }
